@@ -1,8 +1,6 @@
-## Topological Considerations
-of the
-## Wang-Landau sampling algorithm
+*Topological Considerations of the Wang-Landau sampling algorithm*
 
-[Conference Talk](https://github.com/thoppe/Telluride-WL-Topology-Talk)
+[Conference Talk](http://thoppe.github.io/Telluride-WL-Topology-Talk)
 
 ## Travis Hoppe (June 2014)
 
