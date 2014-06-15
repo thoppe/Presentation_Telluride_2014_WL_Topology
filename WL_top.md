@@ -22,9 +22,22 @@ Investigate the roughness / connectivity of the state space in connection with t
 
 ## Wang-Landau
 
++ Samples the density of states
++ Independent of temperature
++ Non-markovion until converged
+
+## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)} $
+
 Original form
 
-$1/f$ reduction rate
+$ H(E) \rightarrow H(E) + 1 $
+$ \Omega(E) \rightarrow f \Omega(E)$
+
+Reduce modification factor $f$ when $H$ is "flat". 
+
+$1/f$ reduction rate:
+
+Use modified $f = 1/t$ after initial states have been sampled. Related to ultimate $1/t$ convergence observed.
 
 ====
 
@@ -115,9 +128,49 @@ Correlation plots for accuracy...?
 ====
 
 What to make of this?
-Can "jumps" improve runtime?
+Can "jumps" improve run-time?
 
+====
+
+### Optimize states
+
+Need correct modification factor:
+
+## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)}  \frac{n_B}{n_A}$
+
+Consider a reduction of the problem into isomorphs
+
+[SHOW STAR, CIRCLE ISOMORPHS]
+
+====
+
+Connectivity for isomorphs:
+
+[SHOW CONNECTIVITY FOR THESE TWO SYSTEMS, N=4]
+
+====
+
+## Metric for optimization
+
+Let $\lambda_2$ be the second largest eigenvalue of the converged WL system, fully converged. We make the anstaz that the convergence is going to be proportional to this value. Certainly, sampling will be faster with a moveset of smaller $\lambda_2$.
+
+[SHOW SPECTRUM FOR STAR, CYCLE]
+
+Typically $\lambda_2 \propto .8$.
+
+====
+
+Consider movesets from one isomorph to the other that are symmetric, ensuring detailed balance. Other movesets may be possible, but these are easy to generate. For example, single spin flips, k spin flips, inversions, etc.
+
+For each of the $k$ isomorphs, this creates a optimization parameter space of $p^{k(k-1)/2}$ where $p=\{0,1\}$. 
+Surprisingly, there exist solutions (not necessarily minimal) with $\lambda_2 << 1$.
+
+It can be show that these movesets still visit each energy with equal probability, they just do so much faster!
+
+[SHOW MOVESET MATRIX]
+[SHOW MOVESET GRAPH]
 
 
 
  
+
