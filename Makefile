@@ -19,7 +19,7 @@ check:
 	aspell -c -H $(target)
 
 view:
-	google-chrome index.html
+	chromium-browser index.html
 clean:
 	rm -rvf index.html
 

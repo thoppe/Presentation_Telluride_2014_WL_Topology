@@ -21,27 +21,52 @@ Investigate the roughness / connectivity of the state space in connection with t
 ====
 
 ## Wang-Landau
-
-+ Samples the density of states
-+ Independent of temperature
-+ Non-markovion until converged
+Samples the density of states, $\Omega$
+Independent of temperature
+Non-markovion until converged
 
 ## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)} $
 
-Original form
+or if moveset is non-symmetric (detailed balance correction):
 
+## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)} \frac{n_{b\rightarrow a}}{n_{a\rightarrow b}} \frac{n_a}{n_b}$
+
+====*
+
+## Modification factors
+
+#### Original formulation
 $ H(E) \rightarrow H(E) + 1 $
 $ \Omega(E) \rightarrow f \Omega(E)$
+Reduce modification factor $f$ when $H$ is "flat".
 
-Reduce modification factor $f$ when $H$ is "flat". 
-
-$1/f$ reduction rate:
-
-Use modified $f = 1/t$ after initial states have been sampled. Related to ultimate $1/t$ convergence observed.
+#### Reduction rate, $1/t$
+Use original formulation for inital sampling.
+Let $f = 1/t$, related to ultimate $1/t$ convergence.
 
 ====
+## "Topology" of states?
+Let $\phi$ be the set of microstates of the system. 
+In order to process _any_ sampling algorithm, one needs
 
-Find system with comparable states, whose topology can be manipulated.
++ An *acceptance function*, $P(a \rightarrow b)$, $a,b \in \phi$.
++ A *microstate weighting function*, $W(a)$, $a\in \phi$.
++ A *moveset function*, $M : \phi \mapsto \phi$.
+====+
+<p>
+Canonical Boltzmann sampling:
+$W(a) = E_a$, $P(a \rightarrow b) = \exp(-(W(b)-W(a))/kT)$
+
+Wang-Landau sampling:
+$W(a) = g(E_a), P(a \rightarrow b) = W(a)/W(b)$
+
+====*
+## "Topology" of states?
+
+The *moveset* defines a directed graph,
+Vertices $v \in \phi$, and edges $e_{ij} = M(v_i, v_j)$.
+
+====
 
 Spin models
 
