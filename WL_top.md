@@ -20,16 +20,15 @@ Investigate the roughness / connectivity of the state space in connection with t
 
 ====
 
-## Wang-Landau
-Samples the density of states, $\Omega$
-Independent of temperature
-Non-markovion until converged
+## Metropolis Sampling
 
-## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)} $
+## $ P(a \rightarrow b ) = \min \left( 1, \frac{w(b)}{w(a)} \right ) $
 
-or if moveset is non-symmetric (detailed balance correction):
+### Boltzmann vs. Wang-Landau
 
-## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)} \frac{n_{b\rightarrow a}}{n_{a\rightarrow b}} \frac{n_a}{n_b}$
+# $ w_\text{B}(a) =  e^{-E_a/kT} \\ w_\text{WL}(a) =  g(E_a)^{-1} $
+
+Each samples a specific distribution.
 
 ====*
 
@@ -42,23 +41,34 @@ Reduce modification factor $f$ when $H$ is "flat".
 
 #### Reduction rate, $1/t$
 Use original formulation for inital sampling.
-Let $f = 1/t$, related to ultimate $1/t$ convergence.
+Siwtch to $f = 1/t$ when smallar than original formulation.
+
+====*
+
+### Advantages of Wang-Landau
+
+| Samples the density of states directly.
+| From partition function, all thermodynamic equilibrium information is avialble.
+| Avoids energetic barriers.
+
+====*
+
+### Wang-Landau warnings:
+
+| Non-markovion until converged.
+| Detialed balance correction:
+
+## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)} \frac{n_{b\rightarrow a}}{n_{a\rightarrow b}} \frac{n_a}{n_b}$
 
 ====
+
 ## "Topology" of states?
 Let $\phi$ be the set of microstates of the system. 
 In order to process _any_ sampling algorithm, one needs
 
 + An *acceptance function*, $P(a \rightarrow b)$, $a,b \in \phi$.
-+ A *microstate weighting function*, $W(a)$, $a\in \phi$.
++ A *microstate weighting function*, $w(a)$, $a\in \phi$.
 + A *moveset function*, $M : \phi \mapsto \phi$.
-====+
-<p>
-Canonical Boltzmann sampling:
-$W(a) = E_a$, $P(a \rightarrow b) = \exp(-(W(b)-W(a))/kT)$
-
-Wang-Landau sampling:
-$W(a) = g(E_a), P(a \rightarrow b) = W(a)/W(b)$
 
 ====*
 ## "Topology" of states?
@@ -66,70 +76,95 @@ $W(a) = g(E_a), P(a \rightarrow b) = W(a)/W(b)$
 The *moveset* defines a directed graph,
 Vertices $v \in \phi$, and edges $e_{ij} = M(v_i, v_j)$.
 
-====
-
-Spin models
-
-+ Ising model
-+ Potts model
-+ XY-models
-
-====
-
-### System under study
-
-Two-state Potts model, isomorphic to the Ising model
-
-$\mathcal{H} = \sum \sigma_{ij}$
-
-Fix $N=100$, thus $|\Omega|=2^N$.
-
-====
-
-Ising model topology
-
-[SHOW GRID]
-[SHOW STAR]
-[SHOW CIRCLE]
-
-What about graphs that follow other degree distributions and correlations?
-
-====
-
-Is there a difference?
-
-SHOW RESULTS FOR STAR, CIRCLE
-
-====
-
-## Erdős–Rényi graphs
-
-Studied under percolation theory
-
-MORE INFO + EXAMPLE
-
 ====*
 
-## Barabási–Albert graphs
+### Example: Ising/Potts model
 
-Scale free!
+A network of n "$(0,1)$ spin" sites that interact via
+#### $\textstyle{\mathcal{H} = J \sum_{ij} \delta_{ij}}$
+where the sum is over all adjacent sites (typically a lattice).
 
-MORE INFO + EXAMPLE
+#### $\phi = \{0,1\}^n, |\phi| = 2^n$
+
+Single spin "flips" define a moveset.
+Other possible moves include double flips,
+inversions, Glauber-type...
+
+====
+
+## Ising model "topology"
+With fixed $M, \phi, w$, how does WL perform?
+
+!(images/network_1D.png)<<height:220px>>
+!(images/network_2D.png)<<height:220px>>
+!(images/network_BA.png)<<height:220px>>
+!(images/network_star.png)<<height:220px>>
+
+
+What about graphs that follow other
+degree distributions and correlations?
 
 ====*
-
-## Star graphs
-
-MORE INFO + EXAMPLE
+### Is there a difference?
+!(images/dos_1D.png)<<height:220px>>
+!(images/dos_2D.png)<<height:220px>>
+!(images/dos_BA.png)<<height:220px>>
+!(images/dos_star.png)<<height:220px>>
+<div class="footnote">[1D, 2D, BA, Star]</div>
 
 ====*
-
-## Grid graphs
+Star graph, $S_n$
+!(images/dos_star.png)<<width:100%>><<transparent>>
+====*
+1D perodic chain, cycle graph, $C_n$
+!(images/dos_1D.png)<<width:100%>><<transparent>>
+====
 
 + Exact solution is known for the density of states [Beale]
 
 MORE INFO + EXAMPLE
 
+====
+
+## Isomorph reduction
+Reduce $2^N$ microstate space,
+to macrostate space defined by *spin isomorphs*.
+
+Grouped into isomorphically different arrangements of spins.
+====+
+e.g. all four (not five!) arrangments of
+!(images/star/s3.png)<<width:25%>><<transparent>>
+
+====
+
+## Star topology, $S_4$
+!(images/star/s0.png)<<width:12%>><<transparent>>
+!(images/star/s1.png)<<width:12%>><<transparent>>
+!(images/star/s2.png)<<width:12%>><<transparent>>
+!(images/star/s3.png)<<width:12%>><<transparent>>
+!(images/star/s4.png)<<width:12%>><<transparent>>
+
+!(images/star/s5.png)<<width:12%>><<transparent>>
+!(images/star/s6.png)<<width:12%>><<transparent>>
+!(images/star/s7.png)<<width:12%>><<transparent>>
+!(images/star/s8.png)<<width:12%>><<transparent>>
+!(images/star/s9.png)<<width:12%>><<transparent>>
+====+
+!(images/star/final_star_5.png)<<width:55%>><<transparent>>
+====*
+
+## Cycle topology, $C_5$
+!(images/cycle/c0.png)<<width:12%>><<transparent>>
+!(images/cycle/c1.png)<<width:12%>><<transparent>>
+!(images/cycle/c2.png)<<width:12%>><<transparent>>
+!(images/cycle/c3.png)<<width:12%>><<transparent>>
+!(images/cycle/c4.png)<<width:12%>><<transparent>>
+
+!(images/cycle/c5.png)<<width:12%>><<transparent>>
+!(images/cycle/c6.png)<<width:12%>><<transparent>>
+!(images/cycle/c7.png)<<width:12%>><<transparent>>
+====+
+!(images/cycle/final_cycle_5.png)<<height:200px>><<transparent>>
 ====
 
 # Convergence conclusions?
