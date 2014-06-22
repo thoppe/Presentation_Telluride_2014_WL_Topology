@@ -212,9 +212,16 @@ Restrict the moveset, now try to optimize the weights.
 
 Leads to non-flat histograms...
 
+[Trebst sampling](http://journals.aps.org/pre/abstract/10.1103/PhysRevE.70.046701) (minimize round-trip times)
+[Isochronoal sampling](http://scitation.aip.org/content/aip/journal/jcp/131/15/10.1063/1.3245304) (minimize and match both times)
 
+====*
+q
+Absorbing Markov Chains
+##  $ P = \left( \begin{array}{cc}  Q & R\\  \mathbf{0} & I_r \end{array} \right)$
+### $ F = \left ( I - Q \right )^{-1} $
 
+mean/variance of absorbance times
 
-
- 
-
+### $\mu = F \mathbf{1}$
+## $\sigma^2 = (2F - I)\mu - \mu^2$
