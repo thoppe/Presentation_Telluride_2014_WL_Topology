@@ -12,11 +12,14 @@ of the
 
 ## Motivation
 
-Investigate the roughness / connectivity of the state space in connection with the Wang-Landau algorithms convergence and accuracy.
+What connection is there between the
 
-====
+##### moveset, energy landscape and selection rules
 
-## Prior Work
+on the convergence and accuracy of sampling algorithms.
+====+
+<br>
+Can we do better?
 
 ====
 
@@ -32,7 +35,7 @@ Each samples a specific distribution.
 
 ====*
 
-## Modification factors
+## WL Modification factors
 
 #### Original formulation
 $ H(E) \rightarrow H(E) + 1 $
@@ -40,23 +43,23 @@ $ \Omega(E) \rightarrow f \Omega(E)$
 Reduce modification factor $f$ when $H$ is "flat".
 
 #### Reduction rate, $1/t$
-Use original formulation for inital sampling.
-Siwtch to $f = 1/t$ when smallar than original formulation.
+Use original formulation for initial sampling.
+Switch to $f = 1/t$ when smaller than original formulation.
 
 ====*
 
-### Advantages of Wang-Landau
+### Wang-Landau advantages:
 
 | Samples the density of states directly.
-| From partition function, all thermodynamic equilibrium information is avialble.
+| From partition function, all thermodynamic equilibrium information is available.
 | Avoids energetic barriers.
 
 ====*
 
-### Wang-Landau warnings:
+### Wang-Landau gotchas:
 
-| Non-markovion until converged.
-| Detialed balance correction:
+| Non-Markovian until converged.
+| Detailed balance correction:
 
 ## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)} \frac{n_{b\rightarrow a}}{n_{a\rightarrow b}} \frac{n_a}{n_b}$
 
@@ -70,17 +73,15 @@ In order to process _any_ sampling algorithm, one needs
 + A *microstate weighting function*, $w(a)$, $a\in \phi$.
 + A *moveset function*, $M : \phi \mapsto \phi$.
 
-====*
-## "Topology" of states?
 
-The *moveset* defines a directed graph,
-Vertices $v \in \phi$, and edges $e_{ij} = M(v_i, v_j)$.
+The moveset defines a directed graph with
+vertices $v \in \phi$, and edges $e_{ij} = M(v_i, v_j)$.
 
 ====*
 
 ### Example: Ising/Potts model
 
-A network of n "$(0,1)$ spin" sites that interact via
+A network of $n, (0,1)$ spin sites that interact via
 #### $\textstyle{\mathcal{H} = J \sum_{ij} \delta_{ij}}$
 where the sum is over all adjacent sites (typically a lattice).
 
@@ -116,28 +117,21 @@ degree distributions and correlations?
 Star graph, $S_n$
 !(images/dos_star.png)<<width:100%>><<transparent>>
 ====*
-1D perodic chain, cycle graph, $C_n$
+1D periodic chain, cycle graph, $C_n$
 !(images/dos_1D.png)<<width:100%>><<transparent>>
 ====
 
-+ Exact solution is known for the density of states [Beale]
-
-MORE INFO + EXAMPLE
-
-====
-
-## Isomorph reduction
+## Isomorphic reduction
 Reduce $2^N$ microstate space,
-to macrostate space defined by *spin isomorphs*.
+to _mesostate_ space defined by *spin isomorphs*.
 
 Grouped into isomorphically different arrangements of spins.
 ====+
-e.g. all four (not five!) arrangments of
+e.g. all four (not five!) arrangements of
 !(images/star/s3.png)<<width:25%>><<transparent>>
 
-====
-
-## Star topology, $S_4$
+====*
+## Star topology, $S_5$
 !(images/star/s0.png)<<width:12%>><<transparent>>
 !(images/star/s1.png)<<width:12%>><<transparent>>
 !(images/star/s2.png)<<width:12%>><<transparent>>
@@ -149,10 +143,8 @@ e.g. all four (not five!) arrangments of
 !(images/star/s7.png)<<width:12%>><<transparent>>
 !(images/star/s8.png)<<width:12%>><<transparent>>
 !(images/star/s9.png)<<width:12%>><<transparent>>
-====+
-!(images/star/final_star_5.png)<<width:55%>><<transparent>>
+!(images/star/final_star_5.png)<<height:200px>><<transparent>>
 ====*
-
 ## Cycle topology, $C_5$
 !(images/cycle/c0.png)<<width:12%>><<transparent>>
 !(images/cycle/c1.png)<<width:12%>><<transparent>>
@@ -163,72 +155,64 @@ e.g. all four (not five!) arrangments of
 !(images/cycle/c5.png)<<width:12%>><<transparent>>
 !(images/cycle/c6.png)<<width:12%>><<transparent>>
 !(images/cycle/c7.png)<<width:12%>><<transparent>>
-====+
 !(images/cycle/final_cycle_5.png)<<height:200px>><<transparent>>
-====
-
-# Convergence conclusions?
-
-Convergence times are widely distribution, even for the same graph.
-
-Does it correlate to:
-+ the number of edges?
-+ curvature of the DOS?
-+ correlation of the graph?
+====*
+## Cycle topology, $C_6, C_7$
+!(images/cycle/final_cycle_6.png)<<width:500px>><<transparent>>
+!(images/cycle/final_cycle_7.png)<<width:600px>><<transparent>>
 
 ====
+## Room for improvement?
+Two systems, with similar $\mathcal{H}$ and DOS,
+widely different convergence times...
 
-# Accuracy plots
+Same moves (single-spin flips), different moveset graphs.
 
-Use $1/f$ mode?
-Run at high acceptance rate first.
+What can we change?
 
+====*
+## Measures of accuracy
+
+Minimize "round-trip" time between two extermal states.
+
+Minimize spectrum of converged WL walks.
 ====
-Correlation plots for accuracy...?
+### Spectrum analysis
+Once WL is fully converged, it is Markovian with an
+eigenvalue spectrum $ \lambda_1 = 1 \ge \lambda_2 \ge \lambda_3 \ge \ldots $
+!(images/eig_cycle_6.png)<<width:400px>><<transparent>>
+!(images/eig_star_6.png)<<width:400px>><<transparent>>
+!(images/eig_ratio_6.png)<<width:400px>><<transparent>>
+
+====*
+
+## Moveset optimization
+
+We can "optimize" a new move, by minimizing $\lambda_2$ and weighting the new move relative to the old ones...
+
+Possible new moves, inversions, $k$-spin flips, bridges, "cheats".
+
+This changes the "edges" in the moveset graph.
+
+Assume that optimized moves will carry over during non-Markovian phase of algorithm.
+
+====*
+### Cheater moves, $C_6$
+allow all possible isomorphs to connect, $\lambda_2/\lambda^*_2\approx 10^{-4}$
+!(images/cheat_cycle_6.png)<<height:600px>><<transparent>>
+====*
+### Cheater moves, $S_6$
+allow all possible isomorphs to connect, $\lambda_2/\lambda^*_2\approx 10^{-5}$
+!(images/cheat_star_6.png)<<height:600px>><<transparent>>
 ====
 
-What to make of this?
-Can "jumps" improve run-time?
+## Weight optimization
 
-====
+Restrict the moveset, now try to optimize the weights.
 
-### Optimize states
+Leads to non-flat histograms...
 
-Need correct modification factor:
 
-## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)}  \frac{n_B}{n_A}$
-
-Consider a reduction of the problem into isomorphs
-
-[SHOW STAR, CIRCLE ISOMORPHS]
-
-====
-
-Connectivity for isomorphs:
-
-[SHOW CONNECTIVITY FOR THESE TWO SYSTEMS, N=4]
-
-====
-
-## Metric for optimization
-
-Let $\lambda_2$ be the second largest eigenvalue of the converged WL system, fully converged. We make the anstaz that the convergence is going to be proportional to this value. Certainly, sampling will be faster with a moveset of smaller $\lambda_2$.
-
-[SHOW SPECTRUM FOR STAR, CYCLE]
-
-Typically $\lambda_2 \propto .8$.
-
-====
-
-Consider movesets from one isomorph to the other that are symmetric, ensuring detailed balance. Other movesets may be possible, but these are easy to generate. For example, single spin flips, k spin flips, inversions, etc.
-
-For each of the $k$ isomorphs, this creates a optimization parameter space of $p^{k(k-1)/2}$ where $p=\{0,1\}$. 
-Surprisingly, there exist solutions (not necessarily minimal) with $\lambda_2 << 1$.
-
-It can be show that these movesets still visit each energy with equal probability, they just do so much faster!
-
-[SHOW MOVESET MATRIX]
-[SHOW MOVESET GRAPH]
 
 
 
