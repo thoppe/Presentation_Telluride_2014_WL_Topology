@@ -74,7 +74,7 @@ In order to process _any_ sampling algorithm, one needs
 + A *moveset function*, $M : \phi \mapsto \phi$.
 
 
-The moveset defines a directed graph with
+The moveset defines a directed graph $G_M$ with
 vertices $v \in \phi$, and edges $e_{ij} = M(v_i, v_j)$.
 
 ====*
@@ -96,10 +96,10 @@ inversions, Glauber-type...
 ## Ising model "topology"
 With fixed $M, \phi, w$, how does WL perform?
 
-!(images/network_1D.png)<<height:220px>>
-!(images/network_2D.png)<<height:220px>>
-!(images/network_BA.png)<<height:220px>>
-!(images/network_star.png)<<height:220px>>
+!(images/network_1D.png)[images/network_1D.png]<<height:220px>>
+!(images/network_2D.png)[images/network_2D.png]<<height:220px>>
+!(images/network_BA.png)[images/network_BA.png]<<height:220px>>
+!(images/network_star.png)[images/network_star.png]<<height:220px>>
 
 
 What about graphs that follow other
@@ -107,18 +107,18 @@ degree distributions and correlations?
 
 ====*
 ### Is there a difference?
-!(images/dos_1D.png)<<height:220px>>
-!(images/dos_2D.png)<<height:220px>>
-!(images/dos_BA.png)<<height:220px>>
-!(images/dos_star.png)<<height:220px>>
-<div class="footnote">[1D, 2D, BA, Star]</div>
+!(images/dos_1D.png)[images/dos_1D.png]<<height:220px>>
+!(images/dos_2D.png)[images/dos_2D.png]<<height:220px>>
+!(images/dos_BA.png)[images/dos_BA.png]<<height:220px>>
+!(images/dos_star.png)[images/dos_star.png]<<height:220px>>
+<div class="footnote">[1D, 2D, Barabási–Albert, Star]</div>
 
 ====*
 Star graph, $S_n$
-!(images/dos_star.png)<<width:100%>><<transparent>>
+!(images/dos_star.png)[images/dos_star.png]<<width:100%>><<transparent>>
 ====*
 1D periodic chain, cycle graph, $C_n$
-!(images/dos_1D.png)<<width:100%>><<transparent>>
+!(images/dos_1D.png)[images/dos_1D.png]<<width:100%>><<transparent>>
 ====
 
 ## Isomorphic reduction
@@ -162,7 +162,7 @@ e.g. all four (not five!) arrangements of
 !(images/cycle/final_cycle_7.png)<<width:600px>><<transparent>>
 
 ====
-## Room for improvement?
+## Topology matters!
 Two systems, with similar $\mathcal{H}$ and DOS,
 widely different convergence times...
 
@@ -208,15 +208,31 @@ allow all possible isomorphs to connect, $\lambda_2/\lambda^*_2\approx 10^{-5}$
 
 ## Weight optimization
 
-Restrict the moveset, now try to optimize the weights.
+Fix the moveset, now try to optimize the weights.
 
 Leads to non-flat histograms...
 
 [Trebst sampling](http://journals.aps.org/pre/abstract/10.1103/PhysRevE.70.046701) (minimize round-trip times)
-[Isochronoal sampling](http://scitation.aip.org/content/aip/journal/jcp/131/15/10.1063/1.3245304) (minimize and match both times)
+[Isochronal sampling](http://scitation.aip.org/content/aip/journal/jcp/131/15/10.1063/1.3245304) (minimize and match both times)
 
 ====*
-q
+### Trebst sampling
+
+_Labels_ the flow of walkers from on extermal state to another,
+$n_{-}(E) + n_{+}(E) = n_w(E)$. Expand steady-state current to first order
+## $ j = D(E) n_w(E) \frac{df}{dE} $
+Minimize $j^{-1}$ (maximizes round-trip rate) via Lagrange multiplier
+## $ \int_{E_-}^{E_+} dE \left ( \frac{1}{D(E) n_w(E)} + \lambda n_w(E) \right ) $
+
+_Assume that the weights are slowly varying in energy_
+## $n_w^{opt} = \frac{1}{\sqrt{D(E)\lambda}}$
+
+====*
+### Energy optimized weights for $C_6$
+!(images/C_6_extreme_energy.png)<<height:600px>><<transparent>>
+====*
+## Optimize over isomorphs?
+
 Absorbing Markov Chains
 ##  $ P = \left( \begin{array}{cc}  Q & R\\  \mathbf{0} & I_r \end{array} \right)$
 ### $ F = \left ( I - Q \right )^{-1} $
@@ -224,4 +240,23 @@ Absorbing Markov Chains
 mean/variance of absorbance times
 
 ### $\mu = F \mathbf{1}$
-## $\sigma^2 = (2F - I)\mu - \mu^2$
+### $\sigma^2 = (2F - I)\mu - \mu^2$
+====*
+### Isomorph optimized weights for $C_6$
+!(images/C_6_extreme_mean.png)<<height:600px>><<transparent>>
+====*
+#### Energy vs. Isomorph (macro vs. meso)
+!(images/C_6_extreme_energy.png)<<height:400px>><<transparent>>
+!(images/C_6_extreme_mean.png)<<height:400px>><<transparent>>
+====
+## Conclusion
+
+Shows there is room for improvement in optimal moveset.
+
+Trebst sampling improves sampling, by walking over the graph faster, but assumes smooth DOS.
+
+Isochronal sampling at energy macrostates is too coarse, and could possibility be improved with more fidelity of macrostates.
+
+====*
+
+## Thanks, you
