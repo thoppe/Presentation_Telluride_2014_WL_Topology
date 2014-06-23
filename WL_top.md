@@ -1,4 +1,4 @@
-{"theme":"beige.css"}
+{"theme":"sky.css"}
 
 ## Topological Considerations
 
@@ -125,7 +125,7 @@ Star graph, $S_n$
 Reduce $2^N$ microstate space,
 to _mesostate_ space defined by *spin isomorphs*.
 
-Grouped into isomorphically different arrangements of spins.
+Group into isomorphically different arrangements of spins.
 ====+
 e.g. all four (not five!) arrangements of
 !(images/star/s3.png)<<width:25%>><<transparent>>
@@ -168,21 +168,24 @@ widely different convergence times...
 
 Same moves (single-spin flips), different moveset graphs.
 
+Stars gives rise to "ladder"-type moveset graphs,
+cycles are more complicated.
+
 What can we change?
 
 ====*
 ## Measures of accuracy
 
-Minimize "round-trip" time between two extermal states.
-
 Minimize spectrum of converged WL walks.
+
+Minimize "round-trip" time between two extermal states.
 ====
 ### Spectrum analysis
 Once WL is fully converged, it is Markovian with an
 eigenvalue spectrum $ \lambda_1 = 1 \ge \lambda_2 \ge \lambda_3 \ge \ldots $
-!(images/eig_cycle_6.png)<<width:400px>><<transparent>>
-!(images/eig_star_6.png)<<width:400px>><<transparent>>
-!(images/eig_ratio_6.png)<<width:400px>><<transparent>>
+!(images/eig_cycle_6.png)[images/eig_cycle_6.png]<<width:400px>><<transparent>>
+!(images/eig_star_6.png)[images/eig_star_6.png]<<width:400px>><<transparent>>
+!(images/eig_ratio_6.png)[images/eig_ratio_6.png]<<width:400px>><<transparent>>
 
 ====*
 
@@ -190,7 +193,8 @@ eigenvalue spectrum $ \lambda_1 = 1 \ge \lambda_2 \ge \lambda_3 \ge \ldots $
 
 We can "optimize" a new move, by minimizing $\lambda_2$ and weighting the new move relative to the old ones...
 
-Possible new moves, inversions, $k$-spin flips, bridges, "cheats".
+Possible new moves, inversions, $k$-spin flips,
+bridges, "cheats".
 
 This changes the "edges" in the moveset graph.
 
@@ -199,11 +203,11 @@ Assume that optimized moves will carry over during non-Markovian phase of algori
 ====*
 ### Cheater moves, $C_6$
 allow all possible isomorphs to connect, $\lambda_2/\lambda^*_2\approx 10^{-4}$
-!(images/cheat_cycle_6.png)<<height:600px>><<transparent>>
+!(images/cheat_cycle_6.png)[images/cheat_cycle_6.png]<<height:600px>><<transparent>>
 ====*
 ### Cheater moves, $S_6$
 allow all possible isomorphs to connect, $\lambda_2/\lambda^*_2\approx 10^{-5}$
-!(images/cheat_star_6.png)<<height:600px>><<transparent>>
+!(images/cheat_star_6.png)[images/cheat_star_6.png]<<height:600px>><<transparent>>
 ====
 
 ## Weight optimization
@@ -218,12 +222,12 @@ Leads to non-flat histograms...
 ====*
 ### Trebst sampling
 
-_Labels_ the flow of walkers from on extermal state to another,
-$n_{-}(E) + n_{+}(E) = n_w(E)$. Expand steady-state current to first order
+_Labels_ flow of walkers from extermal states,
+$n_{-}(E) + n_{+}(E) = n_w(E)$.
+Expand steady-state current to first order
 ## $ j = D(E) n_w(E) \frac{df}{dE} $
 Minimize $j^{-1}$ (maximizes round-trip rate) via Lagrange multiplier
 ## $ \int_{E_-}^{E_+} dE \left ( \frac{1}{D(E) n_w(E)} + \lambda n_w(E) \right ) $
-
 _Assume that the weights are slowly varying in energy_
 ## $n_w^{opt} = \frac{1}{\sqrt{D(E)\lambda}}$
 
@@ -231,18 +235,18 @@ _Assume that the weights are slowly varying in energy_
 ### Energy optimized weights for $C_6$
 !(images/C_6_extreme_energy.png)<<height:600px>><<transparent>>
 ====*
-## Optimize over isomorphs?
+### Optimize over isomorphs?
 
 Absorbing Markov Chains
-##  $ P = \left( \begin{array}{cc}  Q & R\\  \mathbf{0} & I_r \end{array} \right)$
-### $ F = \left ( I - Q \right )^{-1} $
+|##  $ P = \left( \begin{array}{cc}  Q & R\\  \mathbf{0} & I_r \end{array} \right)$
+|### $ F = \left ( I - Q \right )^{-1} $
 
 mean/variance of absorbance times
 
-### $\mu = F \mathbf{1}$
-### $\sigma^2 = (2F - I)\mu - \mu^2$
+|### $\mu = F \mathbf{1}$
+|### $\sigma^2 = (2F - I)\mu - \mu^2$
 ====*
-### Isomorph optimized weights for $C_6$
+### Isomorph optimized weights, $C_6$
 !(images/C_6_extreme_mean.png)<<height:600px>><<transparent>>
 ====*
 #### Energy vs. Isomorph (macro vs. meso)
@@ -251,11 +255,11 @@ mean/variance of absorbance times
 ====
 ## Conclusion
 
-Shows there is room for improvement in optimal moveset.
+There is room for improvement in optimal moveset.
 
-Trebst sampling improves sampling, by walking over the graph faster, but assumes smooth DOS.
+Trebst sampling improves convergence by diffusing faster, but assumes smooth DOS.
 
-Isochronal sampling at energy macrostates is too coarse, and could possibility be improved with more fidelity of macrostates.
+Isochronal sampling at energy macrostates is too coarse, and could possibility be improved with better macrostates. fidelity.
 
 ====*
 
