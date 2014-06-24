@@ -4,7 +4,8 @@
 
 of the
 
-## Wang-Landau sampling algorithm
+## Wang-Landau
+## sampling algorithm
 
 *[Travis Hoppe](http://thoppe.github.io/)*, [(deck source)](https://github.com/thoppe/Telluride-WL-Topology-Talk)
 
@@ -16,26 +17,22 @@ What connection is there between the
 
 ##### moveset, energy landscape and selection rules
 
-on the convergence and accuracy of sampling algorithms.
+and the convergence and accuracy
+of sampling algorithms?
 ====+
 <br>
 Can we do better?
-
 ====
 
 ## Metropolis Sampling
-
 ## $ P(a \rightarrow b ) = \min \left( 1, \frac{w(b)}{w(a)} \right ) $
 
 ### Boltzmann vs. Wang-Landau
-
 # $ w_\text{B}(a) =  e^{-E_a/kT} \\ w_\text{WL}(a) =  g(E_a)^{-1} $
 
 Each samples a specific distribution.
-
 ====*
-
-## WL Modification factors
+## WL Modification
 
 #### Original formulation
 $ H(E) \rightarrow H(E) + 1 $
@@ -45,7 +42,6 @@ Reduce modification factor $f$ when $H$ is "flat".
 #### Reduction rate, $1/t$
 Use original formulation for initial sampling.
 Switch to $f = 1/t$ when smaller than original formulation.
-
 ====*
 
 ### Wang-Landau advantages:
@@ -53,7 +49,6 @@ Switch to $f = 1/t$ when smaller than original formulation.
 | Samples the density of states directly.
 | From partition function, all thermodynamic equilibrium information is available.
 | Avoids energetic barriers.
-
 ====*
 
 ### Wang-Landau gotchas:
@@ -62,7 +57,6 @@ Switch to $f = 1/t$ when smaller than original formulation.
 | Detailed balance correction:
 
 ## $ P(E_a \rightarrow E_b ) = \frac{g(E_a)}{g(E_b)} \frac{n_{b\rightarrow a}}{n_{a\rightarrow b}} \frac{n_a}{n_b}$
-
 ====
 
 ## "Topology" of states?
@@ -72,11 +66,9 @@ In order to process _any_ sampling algorithm, one needs
 + An *acceptance function*, $P(a \rightarrow b)$, $a,b \in \phi$.
 + A *microstate weighting function*, $w(a)$, $a\in \phi$.
 + A *moveset function*, $M : \phi \mapsto \phi$.
-
-
-The moveset defines a directed graph $G_M$ with
-vertices $v \in \phi$, and edges $e_{ij} = M(v_i, v_j)$.
-
+====+
+<br>
+The moveset defines a directed graph $G_M$ with vertices $v \in \phi$, and edges $e_{ij} = M(v_i, v_j)$. A sampling algorithm follows a random walk on $G_M$ given by $P,w$.
 ====*
 
 ### Example: Ising/Potts model
@@ -90,7 +82,6 @@ where the sum is over all adjacent sites (typically a lattice).
 Single spin "flips" define a moveset.
 Other possible moves include double flips,
 inversions, Glauber-type...
-
 ====
 
 ## Ising model "topology"
@@ -104,7 +95,6 @@ With fixed $M, \phi, w$, how does WL perform?
 
 What about graphs that follow other
 degree distributions and correlations?
-
 ====*
 ### Is there a difference?
 !(images/dos_1D.png)[images/dos_1D.png]<<height:220px>>
@@ -112,7 +102,6 @@ degree distributions and correlations?
 !(images/dos_BA.png)[images/dos_BA.png]<<height:220px>>
 !(images/dos_star.png)[images/dos_star.png]<<height:220px>>
 <div class="footnote">[1D, 2D, Barabási–Albert, Star]</div>
-
 ====*
 Star graph, $S_n$
 !(images/dos_star.png)[images/dos_star.png]<<width:100%>><<transparent>>
@@ -160,7 +149,6 @@ e.g. all four (not five!) arrangements of
 ## Cycle topology, $C_6, C_7$
 !(images/cycle/final_cycle_6.png)<<width:500px>><<transparent>>
 !(images/cycle/final_cycle_7.png)<<width:600px>><<transparent>>
-
 ====
 ## Topology matters!
 Two systems, with similar $\mathcal{H}$ and DOS,
@@ -186,7 +174,6 @@ eigenvalue spectrum $ \lambda_1 = 1 \ge \lambda_2 \ge \lambda_3 \ge \ldots $
 !(images/eig_cycle_6.png)[images/eig_cycle_6.png]<<width:400px>><<transparent>>
 !(images/eig_star_6.png)[images/eig_star_6.png]<<width:400px>><<transparent>>
 !(images/eig_ratio_6.png)[images/eig_ratio_6.png]<<width:400px>><<transparent>>
-
 ====*
 
 ## Moveset optimization
@@ -198,7 +185,8 @@ bridges, "cheats".
 
 This changes the "edges" in the moveset graph.
 
-Assume that optimized moves will carry over during non-Markovian phase of algorithm.
+Assume that optimized moves will carry over during
+non-Markovian phase of algorithm.
 
 ====*
 ### Cheater moves, $C_6$
@@ -230,7 +218,6 @@ Minimize $j^{-1}$ (maximizes round-trip rate) via Lagrange multiplier
 ## $ \int_{E_-}^{E_+} dE \left ( \frac{1}{D(E) n_w(E)} + \lambda n_w(E) \right ) $
 _Assume that the weights are slowly varying in energy_
 ## $n_w^{opt} = \frac{1}{\sqrt{D(E)\lambda}}$
-
 ====*
 ### Energy optimized weights for $C_6$
 !(images/C_6_extreme_energy.png)<<height:600px>><<transparent>>
@@ -253,14 +240,27 @@ mean/variance of absorbance times
 !(images/C_6_extreme_energy.png)<<height:400px>><<transparent>>
 !(images/C_6_extreme_mean.png)<<height:400px>><<transparent>>
 ====
-## Conclusion
+## What's next?
 
-There is room for improvement in optimal moveset.
+WL, Trebst, Isochronal are simply,
+weighted selections not necessarily optimal.
+
+Minimize not just round-trip between
+all states, not just extermal states?
+
+Consider not just mean round-trip times,
+but higher moments (e.g. variance, skew)?
+
+Can we quantify the sampling difficultly
+by the moveset topology?
+====*
+## Conclusions
+
+There is room for improvement in optimal moveset,
+small systems provide insight to larger state space.
 
 Trebst sampling improves convergence by diffusing faster, but assumes smooth DOS.
 
-Isochronal sampling at energy macrostates is too coarse, and could possibility be improved with better macrostates. fidelity.
-
+Isochronal sampling at energy macrostates is too coarse, and could be improved with better macrostate fidelity.
 ====*
-
 ## Thanks, you
