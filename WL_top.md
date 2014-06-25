@@ -15,7 +15,7 @@ of the
 
 What connection is there between the
 
-##### moveset, energy landscape and selection rules
+##### moveset, energy landscape & selection rules
 
 and the convergence and accuracy
 of sampling algorithms?
@@ -26,6 +26,7 @@ Can we do better?
 
 ## Metropolis Sampling
 ## $ P(a \rightarrow b ) = \min \left( 1, \frac{w(b)}{w(a)} \right ) $
+====+
 
 ### Boltzmann vs. Wang-Landau
 # $ w_\text{B}(a) =  e^{-E_a/kT} \\ w_\text{WL}(a) =  g(E_a)^{-1} $
@@ -91,7 +92,7 @@ With fixed $M, \phi, w$, how does WL perform?
 !(images/network_2D.png)[images/network_2D.png]<<height:220px>>
 !(images/network_BA.png)[images/network_BA.png]<<height:220px>>
 !(images/network_star.png)[images/network_star.png]<<height:220px>>
-
+<div class="footnote">[1D, 2D, Barabási–Albert, Star]</div>
 
 What about graphs that follow other
 degree distributions and correlations?
@@ -183,7 +184,7 @@ We can "optimize" a new move, by minimizing $\lambda_2$ and weighting the new mo
 Possible new moves, inversions, $k$-spin flips,
 bridges, "cheats".
 
-This changes the "edges" in the moveset graph.
+This changes the edges in the moveset graph.
 
 Assume that optimized moves will carry over during
 non-Markovian phase of algorithm.
@@ -205,22 +206,23 @@ Fix the moveset, now try to optimize the weights.
 Leads to non-flat histograms...
 
 [Trebst sampling](http://journals.aps.org/pre/abstract/10.1103/PhysRevE.70.046701) (minimize round-trip times)
-[Isochronal sampling](http://scitation.aip.org/content/aip/journal/jcp/131/15/10.1063/1.3245304) (minimize and match both times)
+[Isochronal sampling](http://scitation.aip.org/content/aip/journal/jcp/131/15/10.1063/1.3245304) (minimize and match RT times)
 
 ====*
 ### Trebst sampling
 
 _Labels_ flow of walkers from extermal states,
 $n_{-}(E) + n_{+}(E) = n_w(E)$.
-Expand steady-state current to first order
-## $ j = D(E) n_w(E) \frac{df}{dE} $
-Minimize $j^{-1}$ (maximizes round-trip rate) via Lagrange multiplier
+Expand steady-state current to first order,
+## $ j = D(E) n_w(E) \frac{df}{dE}$
+Minimize $j^{-1}$ (maximizes RT rate) via Lagrange multiplier,
 ## $ \int_{E_-}^{E_+} dE \left ( \frac{1}{D(E) n_w(E)} + \lambda n_w(E) \right ) $
-_Assume that the weights are slowly varying in energy_
+
+Assume that the weights are slowly varying in energy,
 ## $n_w^{opt} = \frac{1}{\sqrt{D(E)\lambda}}$
 ====*
 ### Energy optimized weights for $C_6$
-!(images/C_6_extreme_energy.png)<<height:600px>><<transparent>>
+!(images/C_6_extreme_energy.png)[images/C_6_extreme_energy.png]<<height:600px>><<transparent>>
 ====*
 ### Optimize over isomorphs?
 
@@ -234,11 +236,10 @@ mean/variance of absorbance times
 |### $\sigma^2 = (2F - I)\mu - \mu^2$
 ====*
 ### Isomorph optimized weights, $C_6$
-!(images/C_6_extreme_mean.png)<<height:600px>><<transparent>>
+!(images/C_6_extreme_mean.png)[images/C_6_extreme_mean.png]<<height:600px>><<transparent>>
 ====*
 #### Energy vs. Isomorph (macro vs. meso)
-!(images/C_6_extreme_energy.png)<<height:400px>><<transparent>>
-!(images/C_6_extreme_mean.png)<<height:400px>><<transparent>>
+!(images/dual.png)[images/dual.png]<<width:100%>><<transparent>>
 ====
 ## What's next?
 
