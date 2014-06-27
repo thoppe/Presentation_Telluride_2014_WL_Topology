@@ -104,12 +104,18 @@ degree distributions and correlations?
 !(images/dos_star.png)[images/dos_star.png]<<height:220px>>
 <div class="footnote">[1D, 2D, Barabási–Albert, Star]</div>
 ====*
-Star graph, $S_n$
+Star graph, $S_{100}$
 !(images/dos_star.png)[images/dos_star.png]<<width:100%>><<transparent>>
 ====*
-1D periodic chain, cycle graph, $C_n$
+1D periodic chain, cycle graph, $C_{100}$
 !(images/dos_1D.png)[images/dos_1D.png]<<width:100%>><<transparent>>
+====*
+Relative convergence times
+!(images/two_dos.png)[images/two_dos.png]<<width:100%>><<transparent>>
+====+
+!(images/four_dos.png)[images/four_dos.png]<<width:100%>><<transparent>>
 ====
+
 
 ## Isomorphic reduction
 Reduce $2^N$ microstate space,
