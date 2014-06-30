@@ -80,9 +80,9 @@ where the sum is over all adjacent sites (typically a lattice).
 
 #### $\phi = \{0,1\}^n, |\phi| = 2^n$
 
-Single spin "flips" define a moveset.
-Other possible moves include double flips,
-inversions, Glauber-type...
+Single spin flips define a moveset.
+Other possible moves: double flips,
+inversions, Glauber-type.
 ====
 
 ## Ising model "topology"
@@ -118,10 +118,11 @@ Relative convergence times
 
 
 ## Isomorphic reduction
-Reduce $2^N$ microstate space,
+Reduce $2^N$ microstate space
 to _mesostate_ space defined by *spin isomorphs*.
 
-Group into isomorphically different arrangements of spins.
+Group the microstates into isomorphically 
+different arrangements of spins;
 ====+
 e.g. all four (not five!) arrangements of
 !(images/star/s3.png)<<width:25%>><<transparent>>
@@ -158,8 +159,8 @@ e.g. all four (not five!) arrangements of
 !(images/cycle/final_cycle_7.png)<<width:600px>><<transparent>>
 ====
 ## Topology matters!
-Two systems, with similar $\mathcal{H}$ and DOS,
-widely different convergence times...
+Two systems with similar $\mathcal{H}$ and DOS,
+yet widely different convergence times.
 
 Same moves (single-spin flips), different moveset graphs.
 
@@ -185,15 +186,15 @@ eigenvalue spectrum $ \lambda_1 = 1 \ge \lambda_2 \ge \lambda_3 \ge \ldots $
 
 ## Moveset optimization
 
-We can "optimize" a new move, by minimizing $\lambda_2$ and weighting the new move relative to the old ones...
+We can optimize a new move by minimizing $\lambda_2$ and weighting the new move relative to the old ones.
 
 Possible new moves, inversions, $k$-spin flips,
-bridges, "cheats".
+bridges, and "cheats".
 
 This changes the edges in the moveset graph.
 
-Assume that optimized moves will carry over during
-non-Markovian phase of algorithm.
+Assume that optimized moves will carry over during 
+the non-Markovian phase of the algorithm.
 
 ====*
 ### Cheater moves, $C_6$
@@ -209,7 +210,7 @@ allow all possible isomorphs to connect, $\lambda_2/\lambda^*_2\approx 10^{-5}$
 
 Fix the moveset, now try to optimize the weights.
 
-Leads to non-flat histograms...
+This leads to non-flat histograms.
 
 [Trebst sampling](http://journals.aps.org/pre/abstract/10.1103/PhysRevE.70.046701) (minimize round-trip times)
 [Isochronal sampling](http://scitation.aip.org/content/aip/journal/jcp/131/15/10.1063/1.3245304) (minimize and match RT times)
@@ -249,8 +250,8 @@ mean/variance of absorbance times
 ====
 ## What's next?
 
-WL, Trebst, Isochronal are simply,
-weighted selections not necessarily optimal.
+WL, Trebst, and Isochronal weights 
+are not necessarily optimal.
 
 Minimize not just round-trip between
 all states, not just extermal states?
@@ -258,16 +259,18 @@ all states, not just extermal states?
 Consider not just mean round-trip times,
 but higher moments (e.g. variance, skew)?
 
-Can we quantify the sampling difficultly
+Quantify the sampling difficultly
 by the moveset topology?
 ====*
 ## Conclusions
 
-There is room for improvement in optimal moveset,
+There is room for improvement in the optimal moveset,
 small systems provide insight to larger state space.
 
-Trebst sampling improves convergence by diffusing faster, but assumes smooth DOS.
+Trebst sampling is an improvment over flat histograms,
+but assumes smooth DOS.
 
-Isochronal sampling at energy macrostates is too coarse, and could be improved with better macrostate fidelity.
+Sampling at energy macrostates is coarse, 
+it possibly could be improved with better macrostate fidelity.
 ====*
 ## Thanks, you
